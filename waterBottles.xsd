@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
+    vc:minVersion="1.1">
+    
+    <xs:element name="waterBottles">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- product info -->
+                <xs:element name="brand" type="xs:string" minOccurs="1"/>
+                <xs:element name="name" type="xs:string" minOccurs="1"/>
+                
+                <!-- product identifier (required) with attributes x 3 (optional) -->
+                <!-- productID is specific to the brand and product -->
+                <!-- attributes changed to OPTIONAL because no two retailers have the same information available -->
+                <!-- GTIN was changed to UPC -->
+                <xs:element name="productIdentifiers" minOccurs="1">
+                    <xs:complexType>
+                        <!-- productID is specific to each brand and product -->
+                        <xs:sequence>
+                            <xs:element name="productID" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute name="productID" use="optional">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                                <xs:maxLength value="20"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            
+                            <!-- SKU -->
+                            <xs:element name="SKU" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute name="SKU" use="optional">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:pattern value="\d{1,12}"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            
+                            <!-- barcode -->
+                            <xs:element name="barcode" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute name="barcode" use="optional">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:pattern value="\d{1,12}"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            
+                            <!-- UPC -->
+                            <xs:element name="UPC" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute name="UPC" use="optional">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:pattern value="\d{1,12}"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Retailer Wrapper -->
+                <xs:element name="retailer" minOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="retailerID" minOccurs="1">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="\d{2}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="retailerName" type="xs:string" minOccurs="1"/>
+                        </xs:sequence>
+                        <xs:assert test="
+                            (retailerID='01' and retailerName='Academy') or
+                            (retailerID='02' and retailerName='Dicks') or
+                            (retailerID='03' and retailerName='REI') or
+                            (retailerID='04' and retailerName='Backcountry') or
+                            (retailerID='05' and retailerName='YETI') or
+                            (retailerID='06' and retailerName='Stanley') or
+                            (retailerID='07' and retailerName='WalMart') or
+                            (retailerID='08' and retailerName='Target') or
+                            (retailerID='09' and retailerName='Amazon') or
+                            (retailerID='00' and retailerName='Other')
+                            "/>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Physical attributes -->
+                <xs:element name="capacity" minOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d+(\.\d+)?\s? oz\.?"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="material" type="xs:string" minOccurs="1"/>
+                <xs:element name="insulationType" type="xs:string" minOccurs="0"/>
+                <!-- basicColor is from our local controlled vocabulary -->
+                <xs:element name="basicColor" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="code" type="xs:string"/>
+                            <xs:element name="name" type="xs:string"/>
+                        </xs:sequence>
+                        <xs:assert test="
+                            (code='01' and name='Red') or
+                            (code='02' and name='Orange') or
+                            (code='03' and name='Yellow') or
+                            (code='04' and name='Green') or
+                            (code='05' and name='Blue') or
+                            (code='06' and name='Purple') or
+                            (code='07' and name='Pink') or
+                            (code='08' and name='Gray') or
+                            (code='01' and name='White') or
+                            (code='01' and name='Black')
+                            "/>
+                    </xs:complexType>
+                </xs:element>
+                <!-- brandColor is the specific color given by the brand -->
+                <xs:element name="brandColor" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="pattern" type="xs:string" minOccurs="0"/>
+                
+                <!-- height in inches (##.## in) -->
+                <xs:element name="height" minOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d{2}\.\d{2} in"/> 
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <!-- width in inches (##.## in) -->
+                <xs:element name="width" minOccurs="1" maxOccurs="unbounded">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d{1}\.\d{2} in"/> 
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <!-- weight in pounds (#.# lbs) -->
+                <xs:element name="weight" minOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d+(\.\d+)? lbs"/> 
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="handle" type="xs:string" minOccurs="1"/>
+                <xs:element name="fitsCupholder" type="xs:boolean" minOccurs="1"/>
+                <xs:element name="lidType" type="xs:string" minOccurs="1"/>
+                <xs:element name="dishwasherSafe" type="xs:boolean" minOccurs="0"/>
+                <xs:element name="leakproof" type="xs:boolean" minOccurs="0"/>
+                <xs:element name="spillResistant" type="xs:boolean" minOccurs="0"/>
+                <xs:element name="tempRetention" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="bpaFree" type="xs:boolean" minOccurs="0"/>
+                <xs:element name="recyclability" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <!-- countryOfAssembly was changed to simply the country. ISO codes didn't work well with the schema. -->
+                <xs:element name="countryOfAssembly" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="releaseDate" minOccurs="0">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d{4}-\d{2}"/> 
+                            <!-- YYYY-MM -->
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="limitedEdition" type="xs:boolean" minOccurs="0"/>
+                <xs:element name="retailPrice" minOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\$\d+\.\d{2}"/> 
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+                <xs:element name="image" type="xs:anyURI" minOccurs="0"/>
+                <xs:element name="keywords" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="warranty" type="xs:string" minOccurs="0"/>
+                <xs:element name="review" type="xs:anyURI" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>

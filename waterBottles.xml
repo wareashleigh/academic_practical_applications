@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<waterBottles xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/Users/ashleighware/Desktop/Oxygen%20Files/Tharpe%20%26%20Ware%20-%20Deliverable%204.xsd">
+    <brand>Stanley</brand>
+    <name>Quencher H2.0 Flowstate Tumbler</name>
+    <productIdentifiers>
+        <productID productID="20-03403"/>
+        <SKU SKU="1011824043"/>
+    </productIdentifiers>
+    <retailer>
+        <retailerID>06</retailerID>
+        <retailerName>Stanley</retailerName>
+    </retailer>
+    <capacity>40 oz</capacity>
+    <material>stainless steel</material>
+    <insulationType>double-wall vacuum insulation</insulationType>
+    <colorInfo>
+        <basicColor>
+            <code>02</code>
+            <name>Orange</name>
+        </basicColor>
+        <brandColor>Nectarine</brandColor>
+    </colorInfo>
+    <pattern></pattern>
+    <height>12.30 in</height>
+    <width>5.28 in</width>
+    <width>3.10 in</width>
+    <weight>1.4 lbs</weight>
+    <handle>true</handle>
+    <fitsCupholder>true</fitsCupholder>
+    <lidType>screw-on 3-position lid</lidType>
+    <dishwasherSafe>true</dishwasherSafe>
+    <leakproof>false</leakproof>
+    <spillResistant>true</spillResistant>
+    <tempRetention>Cold: 11 hours</tempRetention>
+    <tempRetention>Iced: 2 days</tempRetention>
+    <bpaFree>true</bpaFree>
+    <recyclability>not recyclable</recyclability>
+    <countryOfAssembly>China</countryOfAssembly>
+    <releaseDate>2025-06</releaseDate>
+    <limitedEdition>false</limitedEdition>
+    <retailPrice>$45.00</retailPrice>
+    <url>https://www.stanley1913.com/products/adventure-quencher-travel-tumbler-40-oz?variant=53972889305448</url>
+    <image>https://www.stanley1913.com/products/adventure-quencher-travel-tumbler-40-oz?variant=53972889305448</image>
+    <keywords>tumbler</keywords>
+    <keywords>handle</keywords>
+    <keywords>40 oz.</keywords>
+    <keywords>orange</keywords>
+    <keywords>Stanley</keywords>
+    <warranty>Lifetime Limited Warranty</warranty>
+    <review>https://www.stanley1913.com/products/adventure-quencher-travel-tumbler-40-oz?variant=53972889305448</review>
+</waterBottles>
